@@ -1,4 +1,4 @@
-import sys
+import os, sys, json
 from final_frontier import asteroids, time_warp
 
 # print(dir(asteroids.asteroids))
@@ -11,6 +11,14 @@ valid_time_periods = ['past', 'present', 'future']
 valid_years = range(1800, 2101)
 valid_months = range(1, 13)
 today = time_warp.date.today()
+
+# Make a 'captains_log' folder for our cassetts if one doesn't exist
+if not os.path.exists('final_frontier/captains_log'):
+	os.mkdir('final_frontier/captains_log')
+
+# Make a 'json_data' folder to store the json data if one doesn't exist
+if not os.path.exists('final_frontier/json_data'):
+	os.mkdir('final_frontier/json_data')
 
 try:
 	time_period = sys.argv[1]
@@ -47,10 +55,22 @@ print(query_dates)
 a = asteroids.asteroids()
 
 # Call the closest approach function
-# a.asteroid_closest_approach()
+asteroid_data = a.asteroid_closest_approach()
+
+closest_approach_file = open('final_frontier/json_data/asteroid_closest_approach.json', 'w')
+closest_approach_file.write(json.dumps(asteroid_data))
+closest_approach_file.close()
 
 # Call the closest approaches for the given month
-# a.month_closest_approaches(query_dates)
+# month_closest_approaches_data = a.month_closest_approaches(query_dates)
+
+# month_closest_file = open('final_frontier/json_data/month_closest_approaches.json', 'w')
+# month_closest_file.write(json.dumps(month_closest_approaches_data))
+# month_closest_file.close()
 
 # call the nearest misses function
-# a.nearest_misses()
+# nearest_misses_data = a.nearest_misses()
+
+# nearest_misses_file = open('final_frontier/json_data/nearest_misses.json', 'w')
+# nearest_misses_file.write(json.dumps(nearest_misses_data))
+# nearest_misses_file.close()

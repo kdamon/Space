@@ -18,10 +18,7 @@ def get_query_dates(start_date, end_date):
 
 	# Remove middle dates from the groups since we only need start and end dates
 	for query_group in query_dates:
-		while(len(query_group) > 2):
-			for query in query_group:
-				if query != query_group[0] and query != query_group[-1]:
-					query_group.remove(query)
+		del query_group[1:-1]
 					
 	return query_dates
 
