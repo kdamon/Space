@@ -35,10 +35,11 @@ class asteroids:
 
 	# Function to gather the closest approach data for a given month
 	@vcr.use_cassette('final_frontier/captains_log/mca.yaml')
-	def month_closest_approaches(self):
+	def month_closest_approaches(self, query_dates, only_return_closest_approach=False):
 		self.shuttle_payload['start_date'] = '2021-12-01'
 		self.shuttle_payload['end_date'] = '2021-12-07'
 		print(self.shuttle_payload)
+		print(query_dates)
 		month_closest_approaches_response = requests.get(self.base_url + '/feed', params=self.shuttle_payload)
 		print(month_closest_approaches_response.status_code)
 		print(month_closest_approaches_response.headers['X-RateLimit-Remaining'], 'api calls remaining')
