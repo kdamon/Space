@@ -46,15 +46,24 @@ def calculate_query_dates(time_period):
 			query_dates = get_query_dates(start_date, end_date)
 
 		# Go into the past 15 days and into the future 15 days to get the 30 days surrounding today's date
-		if time_period == 'present':
+		elif time_period == 'present':
 			start_date = today - fifteen_days
 			end_date = today + fifteen_days
 			query_dates = get_query_dates(start_date, end_date)
 
 		# Go into the future 30 days
-		if time_period == 'future':
+		elif time_period == 'future':
 			start_date = today
 			end_date = today + thirty_days
+			query_dates = get_query_dates(start_date, end_date)
+
+		# If no time period, or it somehow fails to get passes in, use the current month and year
+		else:
+			year = int(today.year)
+			month = int(today.month)
+			num_days = calendar.monthrange(year, month)[-1]
+			start_date = date(year, month, 1)
+			end_date = date(year, month, num_days)
 			query_dates = get_query_dates(start_date, end_date)
 
 	return query_dates
