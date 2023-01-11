@@ -1,5 +1,5 @@
 # Space
- This is my solution to an asteroid data gathering code challenge in hopes of a great opportunity at Mashey. Thank you for taking the time to review it!
+ This is my solution to an asteroid data gathering code challenge.
 
 ## Usage:
  `python space.py [past|present|future|4_digit_year-month]`
